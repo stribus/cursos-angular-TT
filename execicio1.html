@@ -19,7 +19,9 @@
 
 	<script>
 		var app = angular.module('aula01', []);
-		app.controller('CabecalhoCtrl',function(){});
+		app.controller('CabecalhoCtrl',function($scope){
+			$scope.nome = 'Fulano';
+		});
 	</script>
 
 </body>
