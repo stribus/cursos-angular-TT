@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+	<meta charset="utf-8">
 	<title></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js"> </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js">
+
+	</script>
 </head>
+
 <body ng-app="aula01">
-	{{2+2}}
-	<input type="text" ng-model="nome">
-	{{nome}}
 	
+
+	<div ng-controller='CabecalhoCtrl'>
+		<input type="text" ng-model="nome"> {{nome}}
+	</div>
+
+
 	<script>
-		var aula01 =  angular.module('aula01',[]);		
+		var app = angular.module('aula01', []);
+		app.controller('CabecalhoCtrl',function(){});
 	</script>
 
 </body>
+
 </html>
