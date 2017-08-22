@@ -15,13 +15,18 @@
 	<div ng-controller='CabecalhoCtrl'>
 		<input type="text" ng-model="nome"> {{nome}}
 	</div>
-
+	<div ng-controller="MenuCtrl">
+		{{nome}}
+	</div>
 
 	<script>
 		var app = angular.module('aula01', []);
-		app.controller('CabecalhoCtrl',function($scope){
+		app.controller('CabecalhoCtrl',['$scope',function($scope){
 			$scope.nome = 'Fulano';
-		});
+		}]);
+		app.controller('MenuCtrl',['$scope',function($scope){
+			$scope.nome = 'Usuário';
+		}]);
 	</script>
 
 </body>
