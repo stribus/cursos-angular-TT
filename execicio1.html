@@ -13,7 +13,10 @@
 	
 
 	<div ng-controller='CabecalhoCtrl'>
-		<input type="text" ng-model="nome"> {{nome}}
+		<input type="text" ng-model="usuario.nome"> 
+		<input type="text" ng-model="usuario.sobrenome">
+		<br>
+		<button ng-click="enviarFormulario()"> Enviar </button>
 	</div>
 	<div ng-controller="MenuCtrl">
 		{{nome}}
@@ -22,7 +25,10 @@
 	<script>
 		var app = angular.module('aula01', []);
 		app.controller('CabecalhoCtrl',['$scope',function($scope){
-			$scope.nome = 'Fulano';
+			
+			$scope.enviarFormulario  = function(){
+				console.log('aqui:',$scope.usuario);
+			};
 		}]);
 		app.controller('MenuCtrl',['$scope',function($scope){
 			$scope.nome = 'Usuário';
