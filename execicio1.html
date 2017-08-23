@@ -25,7 +25,10 @@
 	<script>
 		var app = angular.module('aula01', []);
 		app.controller('CabecalhoCtrl',['$scope',function($scope){
-			
+			$scope.usuario = {
+				nome:'dasdas',
+				sobrenome:''
+			}
 			$scope.enviarFormulario  = function(){
 				console.log('aqui:',$scope.usuario);
 			};
