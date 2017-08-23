@@ -19,6 +19,8 @@
 		<button ng-click="cabecalho.enviarFormulario()"> Enviar </button>
 
 		<span ng-show="cabecalho.sucesso"> Usuário salvo com sucesso</span>
+		<input type="text" ng-model="telefone" tt-somente-numeros>
+		<tt-cpf></tt-cpf>
 	</div>
 	<div ng-controller="MenuCtrl">
 		<ul>
@@ -26,8 +28,31 @@
 		</ul>
 	</div>
 
+
+
 	<script>
 		var app = angular.module('aula01', []);
+		app.directive('ttSomenteNumeros',function(){
+
+			return {
+				restrict:'A',
+				link: function(scope,element,attrs){
+					element.on('keydown',function(evt){
+						if(!parseInt(evt.key) && evt.key !=='0'){
+							evt.preventDefaul();
+							return false;
+						}
+					})
+				}
+			};
+		});	
+
+		app.directive('ttCpf',function (){
+			return{
+				restrict: 'E',
+				template: '<div> CPF : <input type="text"> </div>'
+			}
+		});
 		app.controller('CabecalhoCtrl',[function(){
 			var cabecalho = this;
 			cabecalho.usuario = {
