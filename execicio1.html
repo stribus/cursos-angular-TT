@@ -10,10 +10,10 @@
 </head>
 
 <body ng-app="aula01">
-	
+
 
 	<div ng-controller='CabecalhoCtrl as cabecalho'>
-		<input type="text" ng-model="cabecalho.usuario.nome"> 
+		<input type="text" ng-model="cabecalho.usuario.nome">
 		<input type="text" ng-model="cabecalho.usuario.sobrenome">
 		<br>
 		<button ng-click="cabecalho.enviarFormulario()"> Enviar </button>
@@ -32,45 +32,45 @@
 
 	<script>
 		var app = angular.module('aula01', []);
-		app.directive('ttSomenteNumeros',function(){
+		app.directive('ttSomenteNumeros', function () {
 
 			return {
-				restrict:'A',
-				link: function(scope,element,attrs){
-					element.on('keydown',function(evt){
-						if(!parseInt(evt.key) && evt.key !=='0'){
+				restrict: 'A',
+				link: function (scope, element, attrs) {
+					element.on('keydown', function (evt) {
+						if (!parseInt(evt.key) && evt.key !== '0') {
 							evt.preventDefaul();
 							return false;
 						}
 					})
 				}
 			};
-		});	
+		});
 
-		app.directive('ttCpf',function (){
-			return{
+		app.directive('ttCpf', function () {
+			return {
 				restrict: 'E',
 				template: '<div> CPF : <input type="text"> </div>'
 			}
 		});
-		app.controller('CabecalhoCtrl',[function(){
+		app.controller('CabecalhoCtrl', [function () {
 			var cabecalho = this;
 			cabecalho.usuario = {
-				nome:'',
-				sobrenome:''
+				nome: '',
+				sobrenome: ''
 			};
 			cabecalho.sucesso = false;
 
-			cabecalho.enviarFormulario  = function(){
+			cabecalho.enviarFormulario = function () {
 				cabecalho.sucesso = true;
 			};
 		}]);
-		app.controller('MenuCtrl',['$scope',function($scope){
+		app.controller('MenuCtrl', ['$scope', function ($scope) {
 			$scope.menus = [
-			'Cadastro',
-			'Editar',
-			'Enviar',
-			'Relatorio'
+				'Cadastro',
+				'Editar',
+				'Enviar',
+				'Relatorio'
 			];
 
 		}]);
