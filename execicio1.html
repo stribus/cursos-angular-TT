@@ -21,7 +21,9 @@
 		<span ng-show="cabecalho.sucesso"> Usuário salvo com sucesso</span>
 	</div>
 	<div ng-controller="MenuCtrl">
-		{{nome}}
+		<ul>
+			<li ng-repeat="menu in menus"> {{menu}}</li>
+		</ul>
 	</div>
 
 	<script>
@@ -33,13 +35,19 @@
 				sobrenome:''
 			};
 			cabecalho.sucesso = false;
-			
+
 			cabecalho.enviarFormulario  = function(){
 				cabecalho.sucesso = true;
 			};
 		}]);
 		app.controller('MenuCtrl',['$scope',function($scope){
-			$scope.nome = 'Usuário';
+			$scope.menus = [
+			'Cadastro',
+			'Editar',
+			'Enviar',
+			'Relatorio'
+			];
+
 		}]);
 	</script>
 
