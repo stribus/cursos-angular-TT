@@ -12,11 +12,11 @@
 <body ng-app="aula01">
 	
 
-	<div ng-controller='CabecalhoCtrl'>
-		<input type="text" ng-model="usuario.nome"> 
-		<input type="text" ng-model="usuario.sobrenome">
+	<div ng-controller='CabecalhoCtrl as cabecalho'>
+		<input type="text" ng-model="cabecalho.usuario.nome"> 
+		<input type="text" ng-model="cabecalho.usuario.sobrenome">
 		<br>
-		<button ng-click="enviarFormulario()"> Enviar </button>
+		<button ng-click="cabecalho.enviarFormulario()"> Enviar </button>
 	</div>
 	<div ng-controller="MenuCtrl">
 		{{nome}}
@@ -24,13 +24,14 @@
 
 	<script>
 		var app = angular.module('aula01', []);
-		app.controller('CabecalhoCtrl',['$scope',function($scope){
-			$scope.usuario = {
-				nome:'dasdas',
+		app.controller('CabecalhoCtrl',[function(){
+			var cabecalho = this;
+			cabecalho.usuario = {
+				nome:'dasdas5',
 				sobrenome:''
-			}
-			$scope.enviarFormulario  = function(){
-				console.log('aqui:',$scope.usuario);
+			};
+			cabecalho.enviarFormulario  = function(){
+				console.log('aqui:',cabecalho.usuario);
 			};
 		}]);
 		app.controller('MenuCtrl',['$scope',function($scope){
