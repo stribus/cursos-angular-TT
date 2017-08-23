@@ -17,6 +17,8 @@
 		<input type="text" ng-model="cabecalho.usuario.sobrenome">
 		<br>
 		<button ng-click="cabecalho.enviarFormulario()"> Enviar </button>
+
+		<span ng-show="cabecalho.sucesso"> Usuário salvo com sucesso</span>
 	</div>
 	<div ng-controller="MenuCtrl">
 		{{nome}}
@@ -27,11 +29,13 @@
 		app.controller('CabecalhoCtrl',[function(){
 			var cabecalho = this;
 			cabecalho.usuario = {
-				nome:'dasdas5',
+				nome:'',
 				sobrenome:''
 			};
+			cabecalho.sucesso = false;
+			
 			cabecalho.enviarFormulario  = function(){
-				console.log('aqui:',cabecalho.usuario);
+				cabecalho.sucesso = true;
 			};
 		}]);
 		app.controller('MenuCtrl',['$scope',function($scope){
