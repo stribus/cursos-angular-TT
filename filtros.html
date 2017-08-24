@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js">
+
+	</script>
+</head>
+
+<body ng-app="target">
+	
+	<script>
+		var app = angular.module('target', []);
+		app.controller('ContatosCltr', ['$scope', function($scope){
+			$scope.lista = [
+			{nome: 'Thiago'},
+			{nome: 'flavio'},
+			{nome: 'carime'},
+			{nome: 'maria'},
+			]
+			
+		}])
+
+	</script>
+
+</body>
+
+</html>
