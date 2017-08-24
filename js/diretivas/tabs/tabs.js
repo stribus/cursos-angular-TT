@@ -12,8 +12,16 @@ angular.module('target').directive('tabs', function () {
 			self.tabs = [];
 			self.adicionaTab = function(tab){
 				self.tabs.push(tab);
+				if(self.tabs.length === 1){
+					tab.ativa = true;
+				}
+			};
+			self.selecionaTab = function(tab){
+				self.tabs.forEach(function(t){
+					t.ativa = false;
+				});
+				tab.ativa = true;
 			};
 		}
-
 	};
 });
