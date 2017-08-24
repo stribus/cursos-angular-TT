@@ -1,6 +1,8 @@
 <div>
 	<ul>
-		<li ng-repeat="tab in tabs.tabs">{{tab.titulo}}</li>
+		<li ng-repeat="tab in tabs.tabs">
+			<a ng-click="tabs.selecionaTab(tab)">{{tab.titulo}}</a>
+		</li>
 	</ul>
 	<div ng-transclude></div>
 </div>
