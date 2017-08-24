@@ -33,6 +33,7 @@
 					<td>{{func.profissao}}</td>
 					<td>{{func.telefone}}</td>
 					<td> 
+					<button ng-click="lista.editarFuncionario($index,func)">editar</button>
 					<button ng-click="lista.removerFuncionario($index)">remover</button>
 					</td>
 				</tr>
@@ -47,7 +48,7 @@
 		<br>
 		telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone">
 		<br>
-		<button ng-click="lista.adicionaFuncionario()"> salvar</button>
+		<button ng-click="lista.salvarFuncionario()"> salvar</button>
 	</section>
 
 	<script src='js/controllers/listaCtrl.js'></script>
