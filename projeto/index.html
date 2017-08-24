@@ -1,0 +1,50 @@
+	<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js">
+
+	</script>
+</head>
+
+<body ng-app="target">
+	<script src='js/app.js'></script>
+	<h1>cadastro de funcionarios</h1>
+	<section ng-controller="ListaCtrl as lista">
+	<input type="text" placeholder="filtrar" ng-model=filtro>
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Profissao</th>
+					<th>fone</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="func in lista.funcionarios |filter:filtro">
+					<td>{{func.nome}}</td>
+					<td>{{func.profissao}}</td>
+					<td>{{func.telefone}}</td>
+					<td> 
+					<button>remover</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		Nome: <input type="Text" name="nome" ng-model="lista.novoFuncionario.nome">
+		<br>
+		Profissao: <input type="Text" name="nome" ng-model="lista.novoFuncionario.profissao">
+		<br>
+		telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone">
+		<br>
+		<button ng-click="lista.adicionaFuncionario()"> salvar</button>
+	</section>
+
+	<script src='js/controllers/listaCtrl.js'></script>
+</body>
+
+</html>
