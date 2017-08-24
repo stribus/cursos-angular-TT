@@ -17,7 +17,7 @@ angular.module('target').directive('tabs', function () {
 				}
 			};
 			self.selecionaTab = function(tab){
-				self.tabs.forEach(function(t){
+				angular.forEach(self.tabs, function(t){
 					t.ativa = false;
 				});
 				tab.ativa = true;
