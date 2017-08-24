@@ -13,5 +13,18 @@ app.controller('ListaCtrl', [function(){
 		self.funcionarios.push(novo);
 		self.novoFuncionario = {};
 	}
+	self.removerFuncionario = function(posicao){
+		self.funcionarios.splice(posicao, 1 )
+	}
+
+	self.removerSelecionados = function(){
+		self.funcionarios = self.funcionarios.filter(function(funcionario){
+			
+			return !funcionario.selecionado;
+			
+
+		})
+		console.log(self.funcionarios)
+	}
 
 }])

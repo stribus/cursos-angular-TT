@@ -17,6 +17,7 @@
 		<table>
 			<thead>
 				<tr>
+					<th></th>
 					<th>Nome</th>
 					<th>Profissao</th>
 					<th>fone</th>
@@ -25,15 +26,20 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="func in lista.funcionarios |filter:filtro">
+					<td> 
+					<input type="checkbox" ng-model="func.selecionado">
+					</td>		
 					<td>{{func.nome}}</td>
 					<td>{{func.profissao}}</td>
 					<td>{{func.telefone}}</td>
 					<td> 
-					<button>remover</button>
+					<button ng-click="lista.removerFuncionario($index)">remover</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<hr>
+			<button ng-click="lista.removerSelecionados()">Remover selecionados</button>
 		<hr>
 		Nome: <input type="Text" name="nome" ng-model="lista.novoFuncionario.nome">
 		<br>
