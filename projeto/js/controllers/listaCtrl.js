@@ -2,16 +2,21 @@ var app = angular.module('target');
 app.controller('ListaCtrl', ['apiFuncionarios',function(apiFuncionarios){
 	var self = this;
 	//self.funcionarios = [];
-	apiFuncionarios.buscatodos().then(function(resposta){
+	atualizalista()
+	
+	function atualizalista() {
+		apiFuncionarios.buscatodos().then(function(resposta){
 			self.funcionarios = resposta.data;
 		}).catch(function(error){
 
 		});
-
+	}
 	self.salvarFuncionario = function(){
 		if (self.novoFuncionario.edicao) {
 			var func = angular.copy(self.novoFuncionario)
-			self.funcionarios.splice(func.id,1,func)
+			apiFuncionarios.atualizarFuncionario(func).then(function () {
+				atualizalista();
+			})
 		} else {
 			var novo = angular.copy(self.novoFuncionario)
 			apiFuncionarios.criarFuncionario(novo).then(function(resposta) {
@@ -22,8 +27,11 @@ app.controller('ListaCtrl', ['apiFuncionarios',function(apiFuncionarios){
 		}
 			self.novoFuncionario = {};
 	}
-	self.removerFuncionario = function(posicao){
-		self.funcionarios.splice(posicao, 1 )
+	self.removerFuncionario = function(id){
+		apiFuncionarios.removerFuncionario(id).then(function (resp) {
+			atualizalista();
+		});
+		
 	}
 
 	self.removerSelecionados = function(){
@@ -36,12 +44,15 @@ app.controller('ListaCtrl', ['apiFuncionarios',function(apiFuncionarios){
 	self.editarFuncionario = function(posicao,func){
 		self.novoFuncionario = angular.copy(func);
 		self.novoFuncionario.edicao = true;
-		self.novoFuncionario.id = posicao;
 
 	}
 
 	self.cancelarEdicao = function(){
 			self.novoFuncionario = {};	
 	}
+
+	$rootScope.$on('usuarioLogado', function(e,value){
+		self.usuarioLogado = value;
+	});
 
 }])

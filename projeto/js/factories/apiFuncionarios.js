@@ -1,12 +1,16 @@
 var app = angular.module('target')
 app.factory('apiFuncionarios', ['$http', function($http){
-	var url = 'https://api-vnaymgyddd.now.sh'
+	var url = 'https://api-weqvjozcrq.now.sh/'
 	return {
 		buscatodos: function () {
 			return $http.get(url+'/funcionarios')
 		},
 		criarFuncionario:function (funcionario) {
 			return $http.post(url+'/funcionarios',funcionario);
+			
+		},
+		atualizarFuncionario:function (funcionario) {
+			return $http.put(url+'/funcionarios',funcionario);
 			
 		},
 
