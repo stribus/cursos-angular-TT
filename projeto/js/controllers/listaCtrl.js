@@ -24,11 +24,8 @@ app.controller('ListaCtrl', [function(){
 	}
 
 	self.removerSelecionados = function(){
-		self.funcionarios = self.funcionarios.filter(function(funcionario){
-			
+		self.funcionarios = self.funcionarios.filter(function(funcionario){			
 			return !funcionario.selecionado;
-			
-
 		})
 		
 	}
@@ -38,6 +35,10 @@ app.controller('ListaCtrl', [function(){
 		self.novoFuncionario.edicao = true;
 		self.novoFuncionario.id = posicao;
 
+	}
+
+	self.cancelarEdicao = function(){
+			self.novoFuncionario = {};	
 	}
 
 }])
