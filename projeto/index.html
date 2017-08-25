@@ -40,7 +40,7 @@
 					<td>{{func.telefone}}</td>
 					<td> 
 					<button ng-click="lista.editarFuncionario($index,func)">editar</button>
-					<button ng-click="lista.removerFuncionario($index)">remover</button>
+					<button ng-click="lista.removerFuncionario(func.id)">remover</button>
 					</td>
 				</tr>
 			</tbody>
@@ -59,6 +59,7 @@
 	</section>
 
 	<script src='js/services/autenticacao.js'></script>
+	<script src='js/factories/apiFuncionarios.js'></script>
 	<script src='js/controllers/listaCtrl.js'></script>
 	<script src='js/controllers/cabecalhoCtrl.js'></script>
 </body>
