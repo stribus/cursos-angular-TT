@@ -13,8 +13,8 @@
 	<script src='js/app.js'></script>
 	<header ng-controller="CabecalhoCtrl as cabecalho">
 		<h1>cadastro de funcionarios</h1>	
-		<button ng-hide='cabecalho.usuarioLogado'>entrar</button>
-		<button ng-show='cabecalho.usuarioLogado'>sair</button>
+		<button ng-hide='cabecalho.usuarioLogado' ng-click="cabecalho.entrar()">entrar</button>
+		<button ng-show='cabecalho.usuarioLogado' ng-click="cabecalho.sair()">sair</button>
 		<br><br><br><br>
 	</header>
 	
