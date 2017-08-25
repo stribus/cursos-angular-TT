@@ -1,9 +1,8 @@
 var app = angular.module('target');
-app.controller('ListaCtrl', ['$http',function($http){
+app.controller('ListaCtrl', ['apiFuncionarios',function(apiFuncionarios){
 	var self = this;
 	//self.funcionarios = [];
-	$http.get('https://api-vnaymgyddd.now.sh/funcionarios')
-		.then(function(resposta){
+	apiFuncionarios.buscatodos().then(function(resposta){
 			self.funcionarios = resposta.data;
 		}).catch(function(error){
 
@@ -15,7 +14,10 @@ app.controller('ListaCtrl', ['$http',function($http){
 			self.funcionarios.splice(func.id,1,func)
 		} else {
 			var novo = angular.copy(self.novoFuncionario)
-			self.funcionarios.push(novo);
+			apiFuncionarios.criarFuncionario(novo).then(function(resposta) {
+				self.funcionarios.push(resposta.data);	
+			})
+			 
 			
 		}
 			self.novoFuncionario = {};
