@@ -1,12 +1,13 @@
 var app = angular.module('target');
-app.controller('ListaCtrl', [function(){
+app.controller('ListaCtrl', ['$http',function($http){
 	var self = this;
-	self.funcionarios = [
-	{
-		nome:'stribus',
-		profissao: 'desenv',
-		telefone:'51 987 654 321'
-	},];
+	//self.funcionarios = [];
+	$http.get('https://api-vnaymgyddd.now.sh/funcionarios')
+		.then(function(resposta){
+			self.funcionarios = resposta.data;
+		}).catch(function(error){
+
+		});
 
 	self.salvarFuncionario = function(){
 		if (self.novoFuncionario.edicao) {
