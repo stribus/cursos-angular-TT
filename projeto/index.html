@@ -47,7 +47,7 @@
 			</tbody>
 		</table>
 		<hr>
-			<button ng-click="lista.removerSelecionados()">Remover selecionados</button>
+			<button ng-show='lista.usuarioLogado' ng-click="lista.removerSelecionados()">Remover selecionados</button>
 		<hr>
 		Nome: <input type="Text" name="nome" ng-model="lista.novoFuncionario.nome">
 		<br>
