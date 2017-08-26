@@ -50,14 +50,16 @@
 		<hr>
 			<button ng-show='lista.usuarioLogado' ng-click="lista.removerSelecionados()">Remover selecionados</button>
 		<hr>
-		Nome: <input type="Text" name="nome" ng-model="lista.novoFuncionario.nome">
-		<br>
-		Profissao: <input type="Text" name="nome" ng-model="lista.novoFuncionario.profissao">
-		<br>
-		telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone" mask="(99) 9?99-999-999">
-		<br>
-		<button ng-click="lista.salvarFuncionario()"> salvar</button>
-		<button ng-show="lista.novoFuncionario.edicao" ng-click="lista.cancelarEdicao()"> cancelar</button>
+		<form action=""  accept-charset="utf-8">
+			Nome: <input type="Text" name="nome" ng-model="lista.novoFuncionario.nome">
+			<br>
+			Profissao: <input type="Text" name="nome" ng-model="lista.novoFuncionario.profissao">
+			<br>
+			telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone" mask="(99) 9?99-999-999">
+			<br>
+			<button ng-disabled="!lista.novoFuncionario.nome" ng-click="lista.salvarFuncionario()"> salvar</button>
+			<button ng-show="lista.novoFuncionario.edicao" ng-click="lista.cancelarEdicao()"> cancelar</button>
+		<form>
 	</section>
 
 	<script src='js/services/autenticacao.js'></script>
