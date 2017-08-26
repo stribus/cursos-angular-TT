@@ -35,10 +35,17 @@ app.controller('ListaCtrl', ['apiFuncionarios','$rootScope',function(apiFunciona
 	}
 
 	self.removerSelecionados = function(){
-		self.funcionarios = self.funcionarios.filter(function(funcionario){			
-			return !funcionario.selecionado;
+		var funcionariosRemover = self.funcionarios.filter(function(funcionario){			
+			return funcionario.selecionado;
 		})
-		
+		var promessas = funcionariosRemover.map(function (func) {
+			return apiFuncionarios.removerFuncionario(func.id);
+		})
+		Promise.all(promessas).then(function () {
+			atualizalista();
+		}).catch(function(error){
+			atualizalista();
+		});
 	}
 
 	self.editarFuncionario = function(posicao,func){

@@ -40,8 +40,8 @@
 					<td>{{func.profissao}}</td>
 					<td>{{func.telefone}}</td>
 					<td> 
-					<button ng-show='cabecalho.usuarioLogado' ng-click="lista.editarFuncionario($index,func)">editar</button>
-					<button ng-show='cabecalho.usuarioLogado' ng-click="lista.removerFuncionario(func.id)">remover</button>
+					<button ng-show='lista.usuarioLogado' ng-click="lista.editarFuncionario($index,func)">editar</button>
+					<button ng-show='lista.usuarioLogado' ng-click="lista.removerFuncionario(func.id)">remover</button>
 					</td>
 				</tr>
 			</tbody>
