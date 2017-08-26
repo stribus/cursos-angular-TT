@@ -10,6 +10,7 @@
 </head>
 
 <body ng-app="target">
+	<script src='http://candreoliveira.github.io/bower_components/angular-mask/examples/dist/ngMask.js'></script>
 	<script src='js/app.js'></script>
 	<header ng-controller="CabecalhoCtrl as cabecalho">
 		<h1>cadastro de funcionarios</h1>	
@@ -53,7 +54,7 @@
 		<br>
 		Profissao: <input type="Text" name="nome" ng-model="lista.novoFuncionario.profissao">
 		<br>
-		telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone">
+		telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone" mask="(99) 9?99-999-999">
 		<br>
 		<button ng-click="lista.salvarFuncionario()"> salvar</button>
 		<button ng-show="lista.novoFuncionario.edicao" ng-click="lista.cancelarEdicao()"> cancelar</button>

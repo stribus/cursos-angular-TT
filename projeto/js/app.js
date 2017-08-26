@@ -1,1 +1,1 @@
-var app = angular.module('target', [])
+var app = angular.module('target', ['ngMask'])
