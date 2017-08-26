@@ -1,5 +1,5 @@
 var app = angular.module('target');
-app.controller('ListaCtrl', ['apiFuncionarios',function(apiFuncionarios){
+app.controller('ListaCtrl', ['apiFuncionarios','$rootScope',function(apiFuncionarios,$rootScope){
 	var self = this;
 	//self.funcionarios = [];
 	atualizalista()
