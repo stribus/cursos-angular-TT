@@ -1,19 +1,18 @@
-var app = angular.module('target')
+var app = angular.module('target');
 
-app.controller('CabecalhoCtrl', ['autenticacao','$rootScope',function(autenticacao,$rootScope){
-	var self = this;
-	self.usuarioLogado = false;
-	self.entrar= function () {
-		autenticacao.entrar()
-	}
+app.controller('CabecalhoCtrl', ['$rootScope', 'autenticacao', function ($rootScope, autenticacao) {
+    var self = this;
+    self.usuarioLogado = false;
 
-	self.sair = function () {
-		autenticacao.sair()
-	}
+    self.entrar = function () {
+        autenticacao.entrar();
+    };
 
-	$rootScope.$on('usuarioLogado',function (event,value) {
-		self.usuarioLogado = value;
-		
-	})
-	
-}])
+    self.sair = function () {
+        autenticacao.sair();
+    };
+
+    $rootScope.$on('usuarioLogado', function (event, value) {
+       self.usuarioLogado = value; 
+    });
+}]);
