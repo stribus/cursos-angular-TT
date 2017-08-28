@@ -1,71 +1,106 @@
-	<!DOCTYPE html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js">
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js"></script>
+    <title>Document</title>
 
-	</script>
+    <style>
+        .erro {
+            margin: 10px;
+            padding: 10px;
+            color: #fff;
+            border: 2px solid red;
+            background: rgba(191, 49, 48, 0.9);
+        }
+    </style>
+
+
 </head>
-
 <body ng-app="target">
-	<script src='http://candreoliveira.github.io/bower_components/angular-mask/examples/dist/ngMask.js'></script>
-	<script src='js/app.js'></script>
-	<header ng-controller="CabecalhoCtrl as cabecalho">
-		<h1>cadastro de funcionarios</h1>	
-		<button ng-hide='cabecalho.usuarioLogado' ng-click="cabecalho.entrar()">entrar</button>
-		<button ng-show='cabecalho.usuarioLogado' ng-click="cabecalho.sair()">sair</button>
-		<br><br><br><br>
+    
+    <header ng-controller="CabecalhoCtrl as cabecalho">
+        <h1>Sistema de Funcionarios</h1>
+        <button ng-hide="cabecalho.usuarioLogado" ng-click="cabecalho.entrar()">Entrar</button>
+        <button ng-show="cabecalho.usuarioLogado" ng-click="cabecalho.sair()">Sair</button>
+        <br><br><br><br>
+    </header>
 
-	</header>
-	
-	<section ng-controller="ListaCtrl as lista">
-	<input type="text" placeholder="filtrar" ng-model=filtro>
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th>Nome</th>
-					<th>Profissao</th>
-					<th>fone</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="func in lista.funcionarios |filter:filtro">
-					<td> 
-					<input type="checkbox" ng-model="func.selecionado">
-					</td>		
-					<td>{{func.nome}}</td>
-					<td>{{func.profissao}}</td>
-					<td>{{func.telefone}}</td>
-					<td> 
-					<button ng-show='lista.usuarioLogado' ng-click="lista.editarFuncionario($index,func)">editar</button>
-					<button ng-show='lista.usuarioLogado' ng-click="lista.removerFuncionario(func.id)">remover</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<hr>
-			<button ng-show='lista.usuarioLogado' ng-click="lista.removerSelecionados()">Remover selecionados</button>
-		<hr>
-		<form action=""  accept-charset="utf-8">
-			Nome: <input type="Text" name="nome" ng-model="lista.novoFuncionario.nome">
-			<br>
-			Profissao: <input type="Text" name="nome" ng-model="lista.novoFuncionario.profissao">
-			<br>
-			telefone: <input type="Text" name="nome" ng-model="lista.novoFuncionario.telefone" mask="(99) 9?99-999-999">
-			<br>
-			<button ng-disabled="!lista.novoFuncionario.nome" ng-click="lista.salvarFuncionario()"> salvar</button>
-			<button ng-show="lista.novoFuncionario.edicao" ng-click="lista.cancelarEdicao()"> cancelar</button>
-		<form>
-	</section>
+    <section ng-controller="ListaCtrl as lista">
+        <input type="text" placeholder="Filtrar" ng-model="filtro" />
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th ng-show="lista.usuarioLogado"></th>
+                    <th>Nome</th>
+                    <th>Profissão</th>
+                    <th>Telefone</th>
+                    <th ng-show="lista.usuarioLogado"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="funcionario in lista.funcionarios | filter:filtro">
+                    <td ng-show="lista.usuarioLogado">
+                        <input type="checkbox" ng-model="funcionario.selecionado" />
+                    </td>
+                    <td>{{funcionario.nome}}</td>
+                    <td>{{funcionario.profissao}}</td>
+                    <td>{{funcionario.telefone}}</td>
+                    <td ng-show="lista.usuarioLogado">
+                        <button ng-click="lista.editarFuncionario($index, funcionario)">Editar</button>
+                        <button ng-click="lista.removerFuncionario(funcionario.id)">Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <button ng-show="lista.usuarioLogado" ng-click="lista.removerSelecionados()">Remover selecionados</button>
+        <hr/>
+        <form name="funcionarioForm" action="">
+            Nome: 
+            <input type="text" name="nome" ng-model="lista.novoFuncionario.nome" required minlength="2" />
+            <div class="erro" ng-show="funcionarioForm.nome.$error.required && funcionarioForm.nome.$dirty">
+                Preencha o nome
+            </div>
+            <div class="erro" ng-show="funcionarioForm.nome.$error.minlength">
+                Nome deve ter no minimo 2 caracteres
+            </div>
+            <br >
+            Profissão: <input type="text" name="profissao" ng-model="lista.novoFuncionario.profissao" required />
+            <div class="erro" ng-show="funcionarioForm.profissao.$invalid && funcionarioForm.profissao.$dirty">
+                Preencha o Profissão
+            </div>
+            <br >
+            Email: <input type="email" name="email" ng-model="lista.novoFuncionario.email" />
+            <div class="erro" ng-show="funcionarioForm.email.$invalid">
+                Preencha um email valido
+            </div>
+            <br >
+            Telefone: <input type="text" name="telefone" ng-model="lista.novoFuncionario.telefone" mask="(99) 9?9999-9999" />
+            <div class="erro" ng-show="funcionarioForm.telefone.$invalid">
+                Telefone invalido
+            </div>
+            <br >
+            <button
+                ng-disabled="funcionarioForm.$invalid"
+                ng-click="lista.salvarFuncionario()">Salvar</button>
+            <button ng-show="lista.novoFuncionario.edicao" ng-click="lista.cancelarEdicao()">Cancelar</button>
+            <br>
+            <br>
+            Invalido: {{funcionarioForm.$invalid}}<br>
+            Valido: {{funcionarioForm.$valid}}<br/>
+            Pristine: {{funcionarioForm.$pristine}}<br/>
+            Dirty: {{funcionarioForm.$dirty}}
+        </form>
+    </section>
 
-	<script src='js/services/autenticacao.js'></script>
-	<script src='js/factories/apiFuncionarios.js'></script>
-	<script src='js/controllers/listaCtrl.js'></script>
-	<script src='js/controllers/cabecalhoCtrl.js'></script>
+    <script src="http://candreoliveira.github.io/bower_components/angular-mask/examples/dist/ngMask.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/services/autenticacao.js"></script>
+    <script src="js/factories/apiFuncionarios.js"></script>
+    <script src="js/controllers/listaCtrl.js"></script>
+    <script src="js/controllers/cabecalhoCtrl.js"></script>
 </body>
-
 </html>

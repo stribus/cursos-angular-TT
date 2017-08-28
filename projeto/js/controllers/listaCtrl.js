@@ -1,65 +1,79 @@
 var app = angular.module('target');
-app.controller('ListaCtrl', ['apiFuncionarios','$rootScope',function(apiFuncionarios,$rootScope){
-	var self = this;
-	//self.funcionarios = [];
-	atualizalista()
-	
-	function atualizalista() {
-		apiFuncionarios.buscatodos().then(function(resposta){
-			self.funcionarios = resposta.data;
-		}).catch(function(error){
 
-		});
-	}
-	self.salvarFuncionario = function(){
-		if (self.novoFuncionario.edicao) {
-			var func = angular.copy(self.novoFuncionario)
-			apiFuncionarios.atualizarFuncionario(func).then(function () {
-				atualizalista();
-			})
-		} else {
-			var novo = angular.copy(self.novoFuncionario)
-			apiFuncionarios.criarFuncionario(novo).then(function(resposta) {
-				self.funcionarios.push(resposta.data);	
-			})
-			 
-			
-		}
-			self.novoFuncionario = {};
-	}
-	self.removerFuncionario = function(id){
-		apiFuncionarios.removerFuncionario(id).then(function (resp) {
-			atualizalista();
-		});
-		
-	}
+app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', function (apiFuncionarios, $rootScope) {
+    var self = this;
+    self.funcionarios = [];
+    self.usuarioLogado = false;
+    atualizaLista();
 
-	self.removerSelecionados = function(){
-		var funcionariosRemover = self.funcionarios.filter(function(funcionario){			
-			return funcionario.selecionado;
-		})
-		var promessas = funcionariosRemover.map(function (func) {
-			return apiFuncionarios.removerFuncionario(func.id);
-		})
-		Promise.all(promessas).then(function () {
-			atualizalista();
-		}).catch(function(error){
-			atualizalista();
-		});
-	}
+    $rootScope.$on('usuarioLogado', function (event, value) {
+        self.usuarioLogado = value;
+    });
 
-	self.editarFuncionario = function(posicao,func){
-		self.novoFuncionario = angular.copy(func);
-		self.novoFuncionario.edicao = true;
+    function atualizaLista () {
+        apiFuncionarios.buscaTodos().then(function (resposta) {
+            self.funcionarios = resposta.data;
+        });    
+    };
 
-	}
+    self.salvarFuncionario = function () {
+        if (self.novoFuncionario.edicao) {
 
-	self.cancelarEdicao = function(){
-			self.novoFuncionario = {};	
-	}
+            var funcionario = angular.copy(self.novoFuncionario);
 
-	$rootScope.$on('usuarioLogado', function(e,value){
-		self.usuarioLogado = value;
-	});
+            apiFuncionarios.atualizarFuncionario(funcionario)
+                .then(() => atualizaLista());
+        } else {
+            var novo = angular.copy(self.novoFuncionario);
 
-}])
+            apiFuncionarios.criarFuncionario(novo).then(function (resposta) {
+                self.funcionarios.push(resposta.data);
+            });
+        }
+        self.novoFuncionario = {};
+    };
+
+    self.removerFuncionario = function (id) {
+        apiFuncionarios.removerFuncionario(id).then(function (resposta) {
+            atualizaLista();
+
+            // atualiza todos ou o algoritmo abaixo
+            //
+            // self.funcionarios = self.funcionarios.filter(function (funcionario) {
+            //     return funcionario.id != id;
+            // });
+        });
+    };
+
+    self.editarFuncionario = function (posicao, funcionario) {
+        self.novoFuncionario = angular.copy(funcionario);
+        self.novoFuncionario.edicao = true;
+    };
+
+    self.removerSelecionados = function() {
+        var funcionariosParaRemover = self.funcionarios.filter(function (funcionario) {
+            return funcionario.selecionado;
+        });
+
+        var promessas = funcionariosParaRemover.map(function (funcionario) {
+            return apiFuncionarios.removerFuncionario(funcionario.id);
+        });
+
+        //var promessas = self.funcionarios.reduce(function (memo, funcionario) {
+        //     if (funcionario.selecionado) {
+        //         var promesa = apiFuncionarios.removerFuncionario(funcionario.id);
+        //         memo.push(promesa);
+        //     }
+        //     return memo;
+        // }, [])
+
+        Promise.all(promessas).then(function () {
+            atualizaLista();
+        });
+    };
+
+    self.cancelarEdicao = function () {
+        self.novoFuncionario = {};
+    };
+
+}]);
