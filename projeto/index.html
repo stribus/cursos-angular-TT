@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <base href="/">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.20/angular.js"></script>
     <title>Document</title>
 
@@ -23,7 +24,12 @@
         <h1>Sistema de Funcionarios</h1>
         <button ng-hide="cabecalho.usuarioLogado" ng-click="cabecalho.entrar()">Entrar</button>
         <button ng-show="cabecalho.usuarioLogado" ng-click="cabecalho.sair()">Sair</button>
-        <br><br><br><br>
+        <nav>
+        	<a href="/#/" title=""> Lista</a>
+        	<a href="/#/cadastro" title=""> Cadastro</a>
+        	
+        </nav>
+        <hr>
     </header>
 
     <section ng-view>
