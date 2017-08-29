@@ -6,6 +6,9 @@ app.factory('apiFuncionarios', ['$http', function ($http) {
     return {
         buscaTodos: function () {
             return $http.get(url + '/funcionarios');
+        }, 
+        buscaFuncionario: function (id) {
+            return $http.get(url + '/funcionarios/'+id);
         },
 
         criarFuncionario: function (funcionario) {
