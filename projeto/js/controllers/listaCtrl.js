@@ -1,6 +1,6 @@
 var app = angular.module('target');
 
-app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', function (apiFuncionarios, $rootScope) {
+app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', '$location', function (apiFuncionarios, $rootScope, $location) {
     var self = this;
     self.funcionarios = [];
     self.usuarioLogado = false;
@@ -47,8 +47,9 @@ app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', function (apiFunci
     };
 
     self.editarFuncionario = function (posicao, funcionario) {
-        self.novoFuncionario = angular.copy(funcionario);
-        self.novoFuncionario.edicao = true;
+        //self.novoFuncionario = angular.copy(funcionario);
+        //self.novoFuncionario.edicao = true;
+        $location.path('cadastro/editar/'+funcionario.id);
     };
 
     self.removerSelecionados = function () {

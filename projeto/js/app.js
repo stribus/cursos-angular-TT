@@ -8,7 +8,11 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 			controller: 'ListaCtrl',
 			controllerAs: 'lista'
 		})
-		.when('/cadastro', {
+		.when('/cadastro/novo', {
+			templateUrl: 'views/cadastro.html',
+			controller: 'CadastroCtrl',
+			controllerAs: 'cadastro'
+		}).when('/cadastro/editar/:id', {
 			templateUrl: 'views/cadastro.html',
 			controller: 'CadastroCtrl',
 			controllerAs: 'cadastro'
