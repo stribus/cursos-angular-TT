@@ -3,39 +3,30 @@
 
 
 
- <form name="funcionarioForm" action="">
-            Nome: 
-            <input type="text" name="nome" ng-model="lista.novoFuncionario.nome" required minlength="2" />
-            <div class="erro" ng-show="funcionarioForm.nome.$error.required && funcionarioForm.nome.$dirty">
-                Preencha o nome
-            </div>
-            <div class="erro" ng-show="funcionarioForm.nome.$error.minlength">
-                Nome deve ter no minimo 2 caracteres
-            </div>
-            <br >
-            Profissão: <input type="text" name="profissao" ng-model="lista.novoFuncionario.profissao" required />
-            <div class="erro" ng-show="funcionarioForm.profissao.$invalid && funcionarioForm.profissao.$dirty">
-                Preencha o Profissão
-            </div>
-            <br >
-            Email: <input type="email" name="email" ng-model="lista.novoFuncionario.email" />
-            <div class="erro" ng-show="funcionarioForm.email.$invalid">
-                Preencha um email valido
-            </div>
-            <br >
-            Telefone: <input type="text" name="telefone" ng-model="lista.novoFuncionario.telefone" mask="(99) 9?9999-9999" />
-            <div class="erro" ng-show="funcionarioForm.telefone.$invalid">
-                Telefone invalido
-            </div>
-            <br >
-            <button
-                ng-disabled="funcionarioForm.$invalid"
-                ng-click="lista.salvarFuncionario()">Salvar</button>
-            <button ng-show="lista.novoFuncionario.edicao" ng-click="lista.cancelarEdicao()">Cancelar</button>
-            <br>
-            <br>
-            Invalido: {{funcionarioForm.$invalid}}<br>
-            Valido: {{funcionarioForm.$valid}}<br/>
-            Pristine: {{funcionarioForm.$pristine}}<br/>
-            Dirty: {{funcionarioForm.$dirty}}
-        </form>
+<form name="funcionarioForm" method="POST">
+    Nome:
+    <input type="text" name="nome" ng-model="cadastro.funcionario.nome" required minlength="2" />
+    <div class="erro" ng-show="funcionarioForm.nome.$error.required && funcionarioForm.nome.$dirty">
+        Preencha o nome
+    </div>
+    <div class="erro" ng-show="funcionarioForm.nome.$error.minlength">
+        Nome deve ter no minimo 2 caracteres
+    </div>
+    <br> Profissão: <input type="text" name="profissao" ng-model="cadastro.funcionario.profissao" required />
+    <div class="erro" ng-show="funcionarioForm.profissao.$invalid && funcionarioForm.profissao.$dirty">
+        Preencha o Profissão
+    </div>
+    <br> Email: <input type="email" name="email" ng-model="cadastro.funcionario.email" />
+    <div class="erro" ng-show="funcionarioForm.email.$invalid">
+        Preencha um email valido
+    </div>
+    <br> Telefone: <input type="text" name="telefone" ng-model="cadastro.funcionario.telefone" mask="(99) 9?9999-9999" />
+    <div class="erro" ng-show="funcionarioForm.telefone.$invalid">
+        Telefone invalido
+    </div>
+    <br>
+    <button ng-disabled="funcionarioForm.$invalid" ng-click="cadastro.salvarFuncionario()">Salvar</button>
+    <button ng-show="cadastro.funcionario.edicao" ng-click="cadastro.cancelarEdicao()">Cancelar</button>
+    <br>
+    <br> Invalido: {{funcionarioForm.$invalid}}<br> Valido: {{funcionarioForm.$valid}}<br/> Pristine: {{funcionarioForm.$pristine}}<br/>    Dirty: {{funcionarioForm.$dirty}}
+</form>
