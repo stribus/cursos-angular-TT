@@ -10,28 +10,29 @@ app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', function (apiFunci
         self.usuarioLogado = value;
     });
 
-    function atualizaLista () {
+    function atualizaLista() {
         apiFuncionarios.buscaTodos().then(function (resposta) {
             self.funcionarios = resposta.data;
-        });    
+        });
     };
-
-    self.salvarFuncionario = function () {
-        if (self.novoFuncionario.edicao) {
-
-            var funcionario = angular.copy(self.novoFuncionario);
-
-            apiFuncionarios.atualizarFuncionario(funcionario)
-                .then(() => atualizaLista());
-        } else {
-            var novo = angular.copy(self.novoFuncionario);
-
-            apiFuncionarios.criarFuncionario(novo).then(function (resposta) {
-                self.funcionarios.push(resposta.data);
-            });
-        }
-        self.novoFuncionario = {};
-    };
+    /*
+        self.salvarFuncionario = function () {
+            if (self.novoFuncionario.edicao) {
+    
+                var funcionario = angular.copy(self.novoFuncionario);
+    
+                apiFuncionarios.atualizarFuncionario(funcionario)
+                    .then(() => atualizaLista());
+            } else {
+                var novo = angular.copy(self.novoFuncionario);
+    
+                apiFuncionarios.criarFuncionario(novo).then(function (resposta) {
+                    self.funcionarios.push(resposta.data);
+                });
+            }
+            self.novoFuncionario = {};
+        };
+        */
 
     self.removerFuncionario = function (id) {
         apiFuncionarios.removerFuncionario(id).then(function (resposta) {
@@ -50,7 +51,7 @@ app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', function (apiFunci
         self.novoFuncionario.edicao = true;
     };
 
-    self.removerSelecionados = function() {
+    self.removerSelecionados = function () {
         var funcionariosParaRemover = self.funcionarios.filter(function (funcionario) {
             return funcionario.selecionado;
         });
@@ -72,8 +73,9 @@ app.controller('ListaCtrl', ['apiFuncionarios', '$rootScope', function (apiFunci
         });
     };
 
+    /*
     self.cancelarEdicao = function () {
         self.novoFuncionario = {};
     };
-
+	*/
 }]);

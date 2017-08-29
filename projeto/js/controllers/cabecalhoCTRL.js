@@ -13,6 +13,6 @@ app.controller('CabecalhoCtrl', ['$rootScope', 'autenticacao', function ($rootSc
     };
 
     $rootScope.$on('usuarioLogado', function (event, value) {
-       self.usuarioLogado = value; 
+        self.usuarioLogado = value;
     });
 }]);
